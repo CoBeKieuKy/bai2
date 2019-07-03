@@ -23,4 +23,8 @@ public class ThreadPool {
 	public void submitTask(Runnable task) throws InterruptedException {
 		queue.enqueue(task);
 	}
+	
+	public static void incrementThreadNumber() {
+		thread_number++;
+	}
 }

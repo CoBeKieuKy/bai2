@@ -14,11 +14,11 @@ public class BlockingQueue<Type>  {
     public synchronized void enqueue(Type task) throws InterruptedException  {
         while(this.queue.size() == this.MAX_TASK_IN_QUEUE) {
         	if(ThreadPool.thread_number<ThreadPool.maxSize) {
-	        	for (int count = ThreadPool.coreSize; count < ThreadPool.maxSize; count++) {
-	    			String threadName = "Thread-" + count;
+        			ThreadPool.incrementThreadNumber();
+        			System.out.println("A NEW THREAD HAS BEEN CREATED");
+	    			String threadName = "Thread-" + ThreadPool.thread_number;
 	    			TaskExecutor temp = new TaskExecutor(ThreadPool.queue);
 	    			new Thread(temp, threadName).start();
-	    		}
         	}
             wait();
         }
